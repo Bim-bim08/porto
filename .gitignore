@@ -1,0 +1,13 @@
+# Dependencies
+node_modules/
+
+# Environment variables (jangan commit file .env asli!)
+.env
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db

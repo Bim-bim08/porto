@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= portfolio.name %> — <%= portfolio.role %></title>
+  <meta name="description" content="<%= portfolio.tagline %>" />
+
+  <!-- ===== Google Fonts: Montserrat (heading) + Inter (body) + Caveat (hand) ===== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800;900&family=Caveat:wght@500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- ===== Tailwind CSS (CDN) ===== -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Inter"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            heading: ['"Montserrat"', '"Inter"', 'ui-sans-serif', 'sans-serif'],
+            hand: ['"Caveat"', 'cursive'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- ===== Lucide Icons (CDN) ===== -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    ::selection {
+      background: #f59e0b; /* amber-500 gold */
+      color: #fff;
+    }
+    html {
+      scroll-padding-top: 5rem;
+    }
+    /* Animasi mengapung halus untuk dekorasi karakter Spider-Verse */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+    .animate-float {
+      animation: float 5s ease-in-out infinite;
+    }
+
+    /* ===== Karakter Spider-Verse bergelantung dari tali jaring ===== */
+    /* Efek masuk (drop-in): karakter beserta tali meluncur turun dari batas atas hero */
+    @keyframes web-drop {
+      0%   { transform: translateY(-120%); }
+      70%  { transform: translateY(0); }
+      85%  { transform: translateY(-8px); }
+      100% { transform: translateY(0); }
+    }
+    .web-drop {
+      transform-origin: top center;
+      animation: web-drop 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    .web-drop-delay {
+      animation-delay: 0.18s;
+    }
+    /* Efek gelantung (pendulum): ayunan halus kiri-kanan, tumpuan di titik paling atas tali */
+    @keyframes web-swing {
+      0%, 100% { transform: rotate(-3deg); }
+      50%      { transform: rotate(3deg); }
+    }
+    .web-swing {
+      transform-origin: top center;
+      animation: web-swing 4.5s ease-in-out 1s infinite both;
+    }
+    /* Ritme ayunan sedikit berbeda (lebih lambat) agar terlihat alami */
+    .web-swing-slower {
+      animation-duration: 5.8s;
+      animation-delay: 1.5s;
+    }
+
+    /* Spider-Sense: denyut/getar halus pada garis insting di sekitar kepala */
+    @keyframes insting-pulse {
+      0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.75; }
+      50%      { transform: scale(1.08) rotate(2deg); opacity: 1; }
+    }
+    .animate-insting-pulse {
+      animation: insting-pulse 2.2s ease-in-out infinite;
+    }
+    /* Hormati preferensi pengguna yang tidak menyukai gerakan */
+    @media (prefers-reduced-motion: reduce) {
+      .animate-float,
+      .web-drop,
+      .web-drop-delay,
+      .web-swing,
+      .web-swing-slower,
+      .animate-insting-pulse {
+        animation: none;
+      }
+    }
+    /* Pola jaring laba-laba sangat halus — emas muda di atas latar putih */
+    .web-pattern {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260' viewBox='0 0 260 260'%3E%3Cg fill='none' stroke='%23f59e0b' stroke-width='1'%3E%3Ccircle cx='130' cy='130' r='32'/%3E%3Ccircle cx='130' cy='130' r='66'/%3E%3Ccircle cx='130' cy='130' r='100'/%3E%3Ccircle cx='130' cy='130' r='134'/%3E%3Cpath d='M130 0v260M0 130h260'/%3E%3Cpath d='M38 38l184 184M222 38L38 222'/%3E%3C/g%3E%3C/svg%3E");
+      background-size: 260px 260px;
+    }
+  </style>
+</head>

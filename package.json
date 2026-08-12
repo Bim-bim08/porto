@@ -1,0 +1,28 @@
+{
+  "name": "portofolio-bima-respati",
+  "version": "1.0.0",
+  "description": "Web Portofolio Personal - Bima Respati (Software Engineering Student & Content Creator)",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node --watch app.js",
+    "db:init": "mysql -u root -p < schema.sql"
+  },
+  "keywords": [
+    "portfolio",
+    "express",
+    "ejs",
+    "mysql"
+  ],
+  "author": "Bima Respati",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "mysql2": "^3.11.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
