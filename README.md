@@ -8,6 +8,7 @@ Web Portofolio Personal berbasis **Node.js + Express + EJS + MySQL**, dengan tam
 - **About** — ringkasan profil Software Engineering Student & Content Creator
 - **Skills & Tools** — Programming, Web & Backend, Tools, Video & Multimedia
 - **Featured Projects** — data dinamis dari database SQL, dengan **fallback otomatis ke data dummy** jika MySQL belum terkoneksi
+- **Horizontal Scroll Section** — section proyek di-*pin* (GSAP ScrollTrigger) di desktop: kartu bergerak horizontal mengikuti scroll vertikal dengan progress bar & hint "scroll to explore"; di mobile/tablet otomatis beralih ke native swipe (`overflow-x` + `scroll-snap`) tanpa scroll-jacking
 - **Contact Form** — POST `/contact`, tersimpan ke tabel `messages`
 - **Iron Spider Theme** — putih bersih + maroon/navy/gold dengan pola jaring laba-laba halus di hero, tanpa dark mode
 - **Flash message** — notifikasi sukses/gagal setelah submit form

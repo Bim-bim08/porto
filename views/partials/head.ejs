@@ -50,6 +50,10 @@
   <!-- ===== Lucide Icons (CDN) ===== -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
+  <!-- ===== GSAP + ScrollTrigger (CDN) — horizontal scroll section proyek ===== -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
   <style>
     ::selection {
       background: #f59e0b; /* amber-500 gold */
@@ -268,6 +272,56 @@
     .web-pattern {
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260' viewBox='0 0 260 260'%3E%3Cg fill='none' stroke='%23f59e0b' stroke-width='1'%3E%3Ccircle cx='130' cy='130' r='32'/%3E%3Ccircle cx='130' cy='130' r='66'/%3E%3Ccircle cx='130' cy='130' r='100'/%3E%3Ccircle cx='130' cy='130' r='134'/%3E%3Cpath d='M130 0v260M0 130h260'/%3E%3Cpath d='M38 38l184 184M222 38L38 222'/%3E%3C/g%3E%3C/svg%3E");
       background-size: 260px 260px;
+    }
+
+    /* ============================================================
+       PROYEK — HORIZONTAL SCROLL SECTION
+       Desktop : section di-pin (GSAP ScrollTrigger), kartu bergeser
+                 horizontal (translateX) mengikuti scroll vertikal.
+       Mobile  : native horizontal swipe (overflow-x + scroll-snap)
+                 agar tidak ada scroll-jacking di layar sentuh.
+    ============================================================ */
+    .projects-pin {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      overflow: hidden;
+    }
+    @media (min-width: 769px) {
+      /* Tinggi pasti = viewport: baris track menyerap sisa ruang (flex-1),
+         sehingga tidak pernah melebihi layar (progress bar selalu terlihat). */
+      .projects-pin {
+        height: 100vh;
+      }
+    }
+    .projects-viewport {
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-x: contain;
+      touch-action: pan-y;
+      scrollbar-width: none;
+    }
+    .projects-viewport::-webkit-scrollbar {
+      display: none;
+    }
+    .projects-track > .project-card-wrap {
+      scroll-snap-align: center;
+    }
+    @media (min-width: 769px) {
+      .projects-viewport {
+        overflow: hidden;
+        scroll-snap-type: none;
+        touch-action: auto;
+      }
+      .projects-track {
+        will-change: transform;
+      }
+    }
+    /* Fallback bila GSAP gagal dimuat: native scroll tetap berfungsi di desktop */
+    .projects-viewport.no-gsap-fallback {
+      overflow-x: auto !important;
+      scroll-snap-type: x mandatory !important;
     }
   </style>
 </head>
