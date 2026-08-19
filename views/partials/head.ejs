@@ -5,6 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title><%= portfolio.name %> — <%= portfolio.role %></title>
   <meta name="description" content="<%= portfolio.tagline %>" />
+  <meta name="author" content="<%= portfolio.name %>" />
+  <link rel="canonical" href="<%= portfolio.siteUrl %>/" />
+
+  <!-- ===== Open Graph (pratinjau media sosial) ===== -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="<%= portfolio.name %>" />
+  <meta property="og:title" content="<%= portfolio.name %> — <%= portfolio.role %>" />
+  <meta property="og:description" content="<%= portfolio.tagline %>" />
+  <meta property="og:url" content="<%= portfolio.siteUrl %>/" />
+  <meta property="og:image" content="<%= portfolio.siteUrl %>/images/logo.png" />
+  <meta property="og:image:alt" content="Logo <%= portfolio.name %>" />
+
+  <!-- ===== Twitter Card ===== -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="<%= portfolio.name %> — <%= portfolio.role %>" />
+  <meta name="twitter:description" content="<%= portfolio.tagline %>" />
+  <meta name="twitter:image" content="<%= portfolio.siteUrl %>/images/logo.png" />
+
+  <!-- ===== Favicon ===== -->
+  <link rel="icon" type="image/png" href="/images/logo.png" />
+  <link rel="apple-touch-icon" href="/images/logo.png" />
+  <meta name="theme-color" content="#ffffff" />
 
   <!-- ============================================================
        ANTI AUTO-SCROLL: paksa halaman selalu mulai dari posisi TOP
@@ -61,6 +83,17 @@
     }
     html {
       scroll-padding-top: 5rem;
+    }
+    /* Aksesibilitas: focus state jelas untuk navigasi keyboard */
+    :focus-visible {
+      outline: 2px solid #991b1b; /* red-800 */
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+    /* Cegah horizontal scrollbar liar di semua ukuran layar */
+    html,
+    body {
+      overflow-x: hidden;
     }
     /* Animasi mengapung halus untuk dekorasi karakter Spider-Verse */
     @keyframes float {

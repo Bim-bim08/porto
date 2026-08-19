@@ -73,6 +73,9 @@
     if (projectsDataEl && projectsTrack && projectFilters) {
       const allProjects = JSON.parse(projectsDataEl.textContent);
 
+      // Data lengkap proyek untuk modal case study (dipakai global)
+      window.__projectsData = allProjects;
+
       const esc = (s) =>
         String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
@@ -92,19 +95,35 @@
           <div class="project-card flex h-full w-full flex-col overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-red-200 hover:shadow-xl hover:shadow-red-900/5 will-change-transform">
             <div class="relative h-44 w-full shrink-0 overflow-hidden border-b border-stone-100 bg-slate-100 md:h-48">
               ${p.image ? `<img src="/images/${esc(p.image)}" alt="${esc(p.title)}" loading="lazy" class="h-full w-full object-cover transition-transform duration-500 group-hover/card:scale-105" />` : '<span class="flex h-full w-full items-center justify-center text-xs font-medium tracking-wide text-slate-400">[ Slot Foto Proyek ]</span>'}
-              <span class="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.15em] text-red-900 shadow-sm">${p.project_type === 'video' ? '🎬 Video & Film' : '💻 Web App'}</span>
+              <span class="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.15em] text-red-900 shadow-sm">${p.project_type === 'video' ? '🎬 Sutradara & Editor Utama' : '💻 Web App'}</span>
               <span class="absolute right-4 top-4 inline-flex items-center rounded-full bg-slate-950/80 px-2.5 py-1 font-heading text-[10px] font-bold text-white shadow-sm">${String(idx + 1).padStart(2, '0')}</span>
+              ${p.project_type === 'video' && p.duration ? `<span class="absolute bottom-3 right-3 flex items-center gap-1 rounded-md bg-slate-950/85 px-2 py-1 text-[11px] font-semibold text-white"><i data-lucide="play" class="h-3 w-3"></i>${esc(p.duration)}</span>` : ''}
             </div>
             <div class="flex flex-1 flex-col p-5 md:p-6">
               <h3 class="font-heading text-lg font-extrabold tracking-tight text-slate-950 md:text-xl">${esc(p.title)}</h3>
               <p class="mt-1.5 text-[11px] font-bold uppercase tracking-wider text-red-900/80">${esc(p.role || '')}</p>
               <p class="mt-3 line-clamp-3 min-h-0 flex-1 text-sm leading-relaxed text-slate-500">${esc(p.description)}</p>
               <div class="mt-4 flex shrink-0 flex-wrap gap-1.5">${techTags(p)}</div>
-              <div class="mt-5 flex shrink-0 items-center justify-between border-t border-stone-100 pt-4">
-                <a href="${p.link_url ? esc(p.link_url) : '#'}" ${p.link_url ? '' : 'onclick="return false;"'} class="group/link inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-red-900 transition-all duration-200 hover:gap-3">
+              <div class="mt-5 shrink-0 border-t border-stone-100 pt-4">
+                ${p.project_type === 'video'
+                  ? `<button type="button" data-project-video="${esc(String(p.id))}" title="${p.video_url ? 'Tonton video' : 'Video belum tersedia'}" class="${p.video_url ? '' : 'cursor-not-allowed opacity-45 hover:translate-y-0 hover:bg-red-900 hover:shadow-none'} inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-red-900 px-3 py-2 text-xs font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-red-800 hover:shadow-md">
+                    <i data-lucide="play" class="h-3.5 w-3.5"></i>
+                    ${p.video_url ? 'Tonton Video' : 'Video Segera Hadir'}
+                  </button>`
+                  : `<div class="grid grid-cols-2 gap-2">
+                      <a href="${p.github_url ? esc(p.github_url) : '#'}" ${p.github_url ? '' : 'onclick="return false;"'} title="${p.github_url ? 'Buka repository GitHub' : 'Repository belum tersedia'}" class="${p.github_url ? '' : 'cursor-not-allowed opacity-45 hover:translate-y-0 hover:bg-slate-950 hover:shadow-none'} inline-flex items-center justify-center gap-1.5 rounded-lg bg-slate-950 px-3 py-2 text-xs font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-slate-800 hover:shadow-md">
+                        <i data-lucide="github" class="h-3.5 w-3.5"></i>
+                        GitHub
+                      </a>
+                      <a href="${p.link_url ? esc(p.link_url) : '#'}" ${p.link_url ? '' : 'onclick="return false;"'} title="${p.link_url ? 'Buka demo langsung' : 'Demo belum tersedia'}" class="${p.link_url ? '' : 'cursor-not-allowed opacity-45 hover:translate-y-0 hover:bg-red-900 hover:shadow-none'} inline-flex items-center justify-center gap-1.5 rounded-lg bg-red-900 px-3 py-2 text-xs font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-red-800 hover:shadow-md">
+                        <i data-lucide="external-link" class="h-3.5 w-3.5"></i>
+                        Live Demo
+                      </a>
+                    </div>`}
+                <button type="button" data-project-detail="${esc(String(p.id))}" class="group/detail mt-3 inline-flex w-full items-center justify-center gap-2 rounded-lg border border-stone-200 bg-white px-3 py-2 text-xs font-bold uppercase tracking-wide text-slate-700 transition-all duration-200 hover:border-red-300 hover:bg-red-50 hover:text-red-900">
                   Lihat Detail Proyek
-                  <i data-lucide="arrow-right" class="h-4 w-4 transition-transform duration-200 group-hover/link:translate-x-0.5"></i>
-                </a>
+                  <i data-lucide="book-open" class="h-3.5 w-3.5 transition-transform duration-200 group-hover/detail:translate-x-0.5"></i>
+                </button>
               </div>
             </div>
           </div>
@@ -356,6 +375,251 @@
           activeCard.style.transition = '';
           activeCard = null;
         }
+      });
+    })();
+
+    // ============================================================
+    //  Modal Case Study / Detail Proyek
+    //  Membuka detail (Role, Masalah, Solusi, Fitur Utama, Tech
+    //  Stack) saat tombol "Lihat Detail Proyek" pada kartu diklik.
+    // ============================================================
+    (function initProjectModal() {
+      const modal = document.getElementById('project-modal');
+      const backdrop = document.getElementById('project-modal-backdrop');
+      const closeBtn = document.getElementById('project-modal-close');
+      const img = document.getElementById('project-modal-img');
+      const typeBadge = document.getElementById('project-modal-type');
+      const titleEl = document.getElementById('project-modal-title');
+      const roleEl = document.getElementById('project-modal-role');
+      const problemEl = document.getElementById('project-modal-problem');
+      const solutionEl = document.getElementById('project-modal-solution');
+      const featuresEl = document.getElementById('project-modal-features');
+      const techEl = document.getElementById('project-modal-tech');
+      const githubBtn = document.getElementById('project-modal-github');
+      const demoBtn = document.getElementById('project-modal-demo');
+      const panel = document.getElementById('project-modal-panel');
+      const metricsEl = document.getElementById('project-modal-metrics');
+      const techLabelEl = document.getElementById('project-modal-tech-label');
+      const durationEl = document.getElementById('project-modal-duration');
+      const webActions = document.getElementById('project-modal-web-actions');
+      const watchBtn = document.getElementById('project-modal-watch');
+
+      if (!modal || !backdrop || !closeBtn) return;
+
+      let modalTrigger = null; // elemen pembuka, untuk fokus kembali saat ditutup
+      let currentProject = null; // proyek yang sedang dibuka (untuk tombol Tonton Video)
+
+      const esc = (s) =>
+        String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+      function openProjectModal(id, triggerEl) {
+        const p = (window.__projectsData || []).find((x) => String(x.id) === String(id));
+        if (!p) return;
+
+        modalTrigger = triggerEl || null;
+
+        if (img) {
+          if (p.image) {
+            img.src = '/images/' + p.image;
+            img.alt = p.title;
+            img.classList.remove('hidden');
+          } else {
+            img.classList.add('hidden');
+          }
+        }
+        if (typeBadge) typeBadge.textContent = p.project_type === 'video' ? '🎬 Video & Film' : '💻 Web App';
+        if (titleEl) titleEl.textContent = p.title;
+        if (roleEl) roleEl.textContent = p.role || '-';
+        if (problemEl) problemEl.textContent = p.problem || 'Belum ada catatan masalah.';
+        if (solutionEl) solutionEl.textContent = p.solution || 'Belum ada catatan solusi.';
+
+        if (featuresEl) {
+          const feats = (p.features || '').split(',').map((f) => f.trim()).filter(Boolean);
+          featuresEl.innerHTML = feats.length
+            ? feats
+                .map(
+                  (f) =>
+                    `<li class="flex items-start gap-2 text-sm text-slate-600"><i data-lucide="check-circle-2" class="mt-0.5 h-4 w-4 shrink-0 text-red-900"></i><span>${esc(f)}</span></li>`
+                )
+                .join('')
+            : '<li class="text-sm text-slate-500">Belum ada daftar fitur.</li>';
+        }
+
+        if (techEl) {
+          const tags = (p.tech_stack || '').split(',').map((t) => t.trim()).filter(Boolean);
+          techEl.innerHTML = tags.length
+            ? tags
+                .map((t) => `<span class="rounded-md bg-stone-100 px-2.5 py-1 text-xs font-medium text-stone-700">${esc(t)}</span>`)
+                .join('')
+            : '';
+        }
+
+        // Metrik proyek nyata (mis. "8+ Tabel Database Relasional")
+        if (metricsEl) {
+          const m = (p.metrics || '').split(',').map((x) => x.trim()).filter(Boolean);
+          metricsEl.innerHTML = m.length
+            ? m
+                .map(
+                  (x) =>
+                    `<span class="rounded-lg border border-stone-200 bg-stone-50 px-3 py-2 text-xs font-semibold text-slate-700">${esc(x)}</span>`
+                )
+                .join('')
+            : '';
+          const wrap = document.getElementById('project-modal-metrics-wrap');
+          if (wrap) wrap.classList.toggle('hidden', m.length === 0);
+        }
+
+        // Label tech stack / peralatan (khusus video)
+        if (techLabelEl) techLabelEl.textContent = p.project_type === 'video' ? 'Peralatan & Software' : 'Tech Stack';
+
+        // Durasi video
+        if (durationEl) {
+          if (p.project_type === 'video' && p.duration) {
+            durationEl.classList.remove('hidden');
+            durationEl.textContent = '▶ ' + p.duration;
+          } else {
+            durationEl.classList.add('hidden');
+          }
+        }
+
+        // Aksi footer: web (GitHub/Live) vs video (Tonton Video)
+        currentProject = p;
+        if (webActions) webActions.classList.toggle('hidden', p.project_type === 'video');
+        if (watchBtn) {
+          const isVideo = p.project_type === 'video';
+          watchBtn.classList.toggle('hidden', !isVideo);
+          if (isVideo) {
+            watchBtn.classList.toggle('opacity-45', !p.video_url);
+            watchBtn.classList.toggle('cursor-not-allowed', !p.video_url);
+            watchBtn.innerHTML = p.video_url
+              ? '<i data-lucide="play" class="h-4 w-4"></i> Tonton Video'
+              : '<i data-lucide="play" class="h-4 w-4"></i> Video Segera Hadir';
+          }
+        }
+
+        if (githubBtn) {
+          if (p.github_url) {
+            githubBtn.href = p.github_url;
+            githubBtn.classList.remove('pointer-events-none', 'opacity-45');
+          } else {
+            githubBtn.href = '#';
+            githubBtn.classList.add('pointer-events-none', 'opacity-45');
+          }
+        }
+        if (demoBtn) {
+          if (p.link_url) {
+            demoBtn.href = p.link_url;
+            demoBtn.classList.remove('pointer-events-none', 'opacity-45');
+          } else {
+            demoBtn.href = '#';
+            demoBtn.classList.add('pointer-events-none', 'opacity-45');
+          }
+        }
+
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        if (panel) panel.scrollTop = 0; // mulai dari atas setiap kali dibuka
+        document.body.style.overflow = 'hidden';
+        if (closeBtn) closeBtn.focus(); // aksesibilitas: fokus masuk ke modal
+        if (window.lucide) lucide.createIcons();
+      }
+
+      function closeProjectModal() {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.style.overflow = '';
+        // kembalikan fokus ke tombol pembuka
+        if (modalTrigger && typeof modalTrigger.focus === 'function') modalTrigger.focus();
+        modalTrigger = null;
+      }
+
+      window.openProjectModal = openProjectModal;
+
+      closeBtn.addEventListener('click', closeProjectModal);
+      backdrop.addEventListener('click', closeProjectModal);
+      document.addEventListener('keydown', (e) => {
+        if (e.key !== 'Escape' || modal.classList.contains('hidden')) return;
+        // Jangan tutup modal case study jika lightbox video masih terbuka di atasnya
+        const videoModal = document.getElementById('video-modal');
+        if (videoModal && !videoModal.classList.contains('hidden')) return;
+        closeProjectModal();
+      });
+
+      // Tombol Tonton Video di dalam modal case study
+      if (watchBtn) {
+        watchBtn.addEventListener('click', () => {
+          if (currentProject && currentProject.video_url && window.openProjectVideo) {
+            window.openProjectVideo(currentProject.video_url, watchBtn);
+          }
+        });
+      }
+
+      // Delegasi klik tombol "Lihat Detail Proyek" di kartu
+      // (tetap berlaku setelah filter me-render ulang kartu)
+      document.addEventListener('click', (e) => {
+        const btn = e.target.closest('[data-project-detail]');
+        if (btn) openProjectModal(btn.dataset.projectDetail, btn);
+      });
+    })();
+
+    // ============================================================
+    //  Video Lightbox — embed player karya video proyek
+    // ============================================================
+    (function initVideoModal() {
+      const modal = document.getElementById('video-modal');
+      const backdrop = document.getElementById('video-modal-backdrop');
+      const closeBtn = document.getElementById('video-modal-close');
+      const frame = document.getElementById('video-modal-frame');
+
+      if (!modal || !frame) return;
+
+      let videoTrigger = null;
+
+      // Ubah link YouTube biasa menjadi URL embed
+      function toEmbed(url) {
+        if (!url) return '';
+        const m = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]{6,})/);
+        if (m) return 'https://www.youtube.com/embed/' + m[1] + '?autoplay=1&rel=0';
+        if (/youtube(-nocookie)?\.com\/embed\//.test(url)) return url;
+        return url; // asumsikan sudah bisa di-embed
+      }
+
+      function openVideoModal(url, triggerEl) {
+        videoTrigger = triggerEl || null;
+        frame.src = toEmbed(url);
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+        if (closeBtn) closeBtn.focus();
+      }
+
+      function closeVideoModal() {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        frame.src = ''; // hentikan pemutaran
+        // Hanya lepaskan kunci scroll jika modal case study juga sudah tertutup
+        const caseModal = document.getElementById('project-modal');
+        if (!caseModal || caseModal.classList.contains('hidden')) {
+          document.body.style.overflow = '';
+        }
+        if (videoTrigger && typeof videoTrigger.focus === 'function') videoTrigger.focus();
+        videoTrigger = null;
+      }
+
+      window.openProjectVideo = openVideoModal;
+
+      if (closeBtn) closeBtn.addEventListener('click', closeVideoModal);
+      if (backdrop) backdrop.addEventListener('click', closeVideoModal);
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeVideoModal();
+      });
+
+      // Tombol "Tonton Video" pada kartu proyek video
+      document.addEventListener('click', (e) => {
+        const btn = e.target.closest('[data-project-video]');
+        if (!btn) return;
+        const p = (window.__projectsData || []).find((x) => String(x.id) === String(btn.dataset.projectVideo));
+        if (p && p.video_url) openVideoModal(p.video_url, btn);
       });
     })();
   </script>

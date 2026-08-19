@@ -113,7 +113,7 @@
           <div class="photo-rise relative inline-block w-full">
             <img
               src="/images/profile-hero.png"
-              alt="Bima Respati"
+              alt="Foto profil Bima Respati"
               class="block h-auto w-full object-contain drop-shadow-2xl"
               style="mask-image: linear-gradient(to bottom, black 80%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);"
             />
@@ -130,7 +130,7 @@
         </div>
 
         <!-- Nama raksasa (overlap tipis di bawah foto) -->
-        <h1 class="font-heading relative z-10 -mt-8 text-5xl font-extrabold leading-[0.95] tracking-tighter text-slate-950 sm:-mt-10 sm:text-7xl lg:text-8xl">
+        <h1 class="font-heading relative z-10 -mt-8 text-4xl font-extrabold leading-[0.95] tracking-tighter text-slate-950 sm:-mt-10 sm:text-7xl lg:text-8xl">
           <span class="mask-reveal block">
             <span class="mask-reveal-inner mask-reveal-later block"><%= portfolio.name %></span>
           </span>
@@ -163,6 +163,14 @@
             Hubungi Saya
             <i data-lucide="mail" class="h-4 w-4"></i>
           </a>
+          <a
+            href="/cv/Bima-Respati-CV.pdf"
+            download
+            class="cta-slide-left inline-flex items-center gap-2 rounded-full border border-amber-500 bg-amber-500/10 px-8 py-3.5 text-sm font-semibold text-amber-800 transition-all duration-300 hover:-translate-y-0.5 hover:bg-amber-500 hover:text-slate-950 hover:shadow-xl hover:shadow-amber-500/30"
+          >
+            <i data-lucide="download" class="h-4 w-4"></i>
+            Download CV
+          </a>
         </div>
       </div>
     </section>
@@ -181,6 +189,13 @@
             <% portfolio.about.forEach((paragraph) => { %>
               <p><%= paragraph %></p>
             <% }) %>
+          </div>
+          <div class="mt-6 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3.5 py-1.5 text-xs font-semibold text-emerald-700">
+            <span class="relative flex h-2 w-2">
+              <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+              <span class="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
+            </span>
+            Terbuka untuk PKL · Freelance · Kolaborasi
           </div>
         </div>
 
@@ -239,6 +254,94 @@
     </section>
 
     <!-- ============================================================
+         EDUCATION & EXPERIENCE — Timeline
+    ============================================================ -->
+    <section id="education" class="bg-white py-20 sm:py-24">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <div class="max-w-2xl">
+          <span class="inline-flex items-center gap-2 rounded-full border border-red-200 bg-red-50 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.25em] text-red-900">
+            [ RIWAYAT ]
+          </span>
+          <h2 class="font-heading mt-3 text-3xl font-extrabold uppercase tracking-tight text-slate-950 sm:text-4xl">
+            Pendidikan &amp; Pengalaman
+          </h2>
+          <p class="mt-4 leading-relaxed text-slate-600">
+            Perjalanan pendidikan dan pengalaman memimpin yang membentuk cara saya bekerja — dari merancang database hingga memimpin produksi video.
+          </p>
+        </div>
+
+        <div class="mt-12 grid gap-10 lg:grid-cols-2 lg:gap-12">
+          <!-- ===== Pendidikan ===== -->
+          <div>
+            <h3 class="flex items-center gap-2.5 font-heading text-lg font-bold text-slate-950">
+              <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-red-100 text-red-900">
+                <i data-lucide="graduation-cap" class="h-5 w-5"></i>
+              </span>
+              Pendidikan
+            </h3>
+            <div class="relative mt-6 space-y-8 border-l-2 border-stone-200 pl-6">
+              <% portfolio.education.forEach((edu) => { %>
+                <div class="relative">
+                  <span class="absolute -left-[30px] top-1.5 h-4 w-4 rounded-full border-2 border-red-900 bg-white"></span>
+                  <div class="rounded-2xl border border-stone-200 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                      <h4 class="font-heading font-bold text-slate-950"><%= edu.school %></h4>
+                      <span class="rounded-full bg-red-50 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-red-900"><%= edu.period %></span>
+                    </div>
+                    <p class="mt-1 text-sm font-semibold text-amber-600"><%= edu.major %></p>
+                    <p class="mt-2 text-sm leading-relaxed text-slate-600"><%= edu.desc %></p>
+                  </div>
+                </div>
+              <% }) %>
+            </div>
+          </div>
+
+          <!-- ===== Pengalaman & Leadership ===== -->
+          <div>
+            <h3 class="flex items-center gap-2.5 font-heading text-lg font-bold text-slate-950">
+              <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-50 text-amber-600">
+                <i data-lucide="users" class="h-5 w-5"></i>
+              </span>
+              Pengalaman &amp; Leadership
+            </h3>
+            <div class="relative mt-6 space-y-8 border-l-2 border-stone-200 pl-6">
+              <% portfolio.experiences.forEach((exp) => { %>
+                <div class="relative">
+                  <span class="absolute -left-[30px] top-1.5 h-4 w-4 rounded-full border-2 border-amber-500 bg-white"></span>
+                  <div class="rounded-2xl border border-stone-200 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                      <h4 class="font-heading font-bold text-slate-950"><%= exp.role %></h4>
+                      <span class="rounded-full bg-slate-100 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-slate-600"><%= exp.period %></span>
+                    </div>
+                    <p class="mt-1 text-sm font-semibold text-slate-700"><%= exp.org %></p>
+                    <div class="mt-3 flex flex-wrap gap-2">
+                      <span class="inline-flex items-center gap-1.5 rounded-full border border-stone-200 bg-white px-2.5 py-1 text-[11px] font-medium text-slate-600">
+                        <i data-lucide="users" class="h-3 w-3"></i>
+                        Tim <%= exp.team %>
+                      </span>
+                      <span class="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-[11px] font-medium text-emerald-700">
+                        <i data-lucide="git-branch" class="h-3 w-3"></i>
+                        <%= exp.gitWorkflow %>
+                      </span>
+                    </div>
+                    <ul class="mt-3 space-y-1.5">
+                      <% exp.responsibilities.forEach((r) => { %>
+                        <li class="flex items-start gap-2 text-sm leading-relaxed text-slate-600">
+                          <i data-lucide="check" class="mt-0.5 h-4 w-4 shrink-0 text-amber-500"></i>
+                          <span><%= r %></span>
+                        </li>
+                      <% }) %>
+                    </ul>
+                  </div>
+                </div>
+              <% }) %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
          FEATURED PROJECTS — Horizontal Scroll Section
          Desktop : section di-pin (GSAP ScrollTrigger); kartu proyek
                    bergerak horizontal (translateX) mengikuti scroll.
@@ -263,12 +366,11 @@
             </div>
 
             <div class="flex flex-wrap items-center gap-3">
-              <% if (!dbAvailable) { %>
-                <span class="inline-flex items-center gap-1.5 rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-xs font-medium text-amber-700">
-                  <i data-lucide="database" class="h-3.5 w-3.5"></i>
-                  Mode demo — data dummy
-                </span>
-              <% } %>
+              <!-- Badge Featured Projects -->
+              <span class="inline-flex items-center gap-1.5 rounded-full border border-slate-950/10 bg-slate-50 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-700">
+                <i data-lucide="sparkles" class="h-3.5 w-3.5 text-amber-500"></i>
+                Featured Projects
+              </span>
 
               <!-- Filter kategori pill-button -->
               <div id="project-filters" class="flex flex-wrap gap-2">
@@ -344,11 +446,17 @@
                             <span class="flex h-full w-full items-center justify-center text-xs font-medium tracking-wide text-slate-400">[ Slot Foto Proyek ]</span>
                           <% } %>
                           <span class="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.15em] text-red-900 shadow-sm">
-                            <%= project.project_type === 'video' ? '🎬 Video & Film' : '💻 Web App' %>
+                            <%= project.project_type === 'video' ? '🎬 Sutradara & Editor Utama' : '💻 Web App' %>
                           </span>
                           <span class="absolute right-4 top-4 inline-flex items-center rounded-full bg-slate-950/80 px-2.5 py-1 font-heading text-[10px] font-bold text-white shadow-sm">
                             <%= String(idx + 1).padStart(2, '0') %>
                           </span>
+                          <% if (project.project_type === 'video' && project.duration) { %>
+                            <span class="absolute bottom-3 right-3 flex items-center gap-1 rounded-md bg-slate-950/85 px-2 py-1 text-[11px] font-semibold text-white">
+                              <i data-lucide="play" class="h-3 w-3"></i>
+                              <%= project.duration %>
+                            </span>
+                          <% } %>
                         </div>
 
                         <!-- Body -->
@@ -361,15 +469,48 @@
                               <span class="rounded-md bg-stone-100 px-2 py-1 text-[11px] font-medium text-stone-600"><%= tech %></span>
                             <% }) %>
                           </div>
-                          <div class="mt-5 flex shrink-0 items-center justify-between border-t border-stone-100 pt-4">
-                            <a
-                              href="<%= project.link_url || '#' %>"
-                              <% if (!project.link_url) { %>onclick="return false;"<% } %>
-                              class="group/link inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-red-900 transition-all duration-200 hover:gap-3"
+                          <div class="mt-5 shrink-0 border-t border-stone-100 pt-4">
+                            <% if (project.project_type === 'video') { %>
+                              <button
+                                type="button"
+                                data-project-video="<%= project.id %>"
+                                title="<%= project.video_url ? 'Tonton video' : 'Video belum tersedia' %>"
+                                class="<%= project.video_url ? '' : 'cursor-not-allowed opacity-45 hover:translate-y-0 hover:bg-red-900 hover:shadow-none' %> inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-red-900 px-3 py-2 text-xs font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-red-800 hover:shadow-md"
+                              >
+                                <i data-lucide="play" class="h-3.5 w-3.5"></i>
+                                <%= project.video_url ? 'Tonton Video' : 'Video Segera Hadir' %>
+                              </button>
+                            <% } else { %>
+                              <div class="grid grid-cols-2 gap-2">
+                                <a
+                                  href="<%= project.github_url || '#' %>"
+                                  <% if (!project.github_url) { %>onclick="return false;"<% } %>
+                                  title="<%= project.github_url ? 'Buka repository GitHub' : 'Repository belum tersedia' %>"
+                                  class="<%= project.github_url ? '' : 'cursor-not-allowed opacity-45 hover:translate-y-0 hover:bg-slate-950 hover:shadow-none' %> inline-flex items-center justify-center gap-1.5 rounded-lg bg-slate-950 px-3 py-2 text-xs font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-slate-800 hover:shadow-md"
+                                >
+                                  <i data-lucide="github" class="h-3.5 w-3.5"></i>
+                                  GitHub
+                                </a>
+                                <a
+                                  href="<%= project.link_url || '#' %>"
+                                  <% if (project.link_url) { %>target="_blank" rel="noopener noreferrer"<% } %>
+                                  <% if (!project.link_url) { %>onclick="return false;"<% } %>
+                                  title="<%= project.link_url ? 'Buka demo langsung' : 'Demo belum tersedia' %>"
+                                  class="<%= project.link_url ? '' : 'cursor-not-allowed opacity-45 hover:translate-y-0 hover:bg-red-900 hover:shadow-none' %> inline-flex items-center justify-center gap-1.5 rounded-lg bg-red-900 px-3 py-2 text-xs font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-red-800 hover:shadow-md"
+                                >
+                                  <i data-lucide="external-link" class="h-3.5 w-3.5"></i>
+                                  Live Demo
+                                </a>
+                              </div>
+                            <% } %>
+                            <button
+                              type="button"
+                              data-project-detail="<%= project.id %>"
+                              class="group/detail mt-3 inline-flex w-full items-center justify-center gap-2 rounded-lg border border-stone-200 bg-white px-3 py-2 text-xs font-bold uppercase tracking-wide text-slate-700 transition-all duration-200 hover:border-red-300 hover:bg-red-50 hover:text-red-900"
                             >
                               Lihat Detail Proyek
-                              <i data-lucide="arrow-right" class="h-4 w-4 transition-transform duration-200 group-hover/link:translate-x-0.5"></i>
-                            </a>
+                              <i data-lucide="book-open" class="h-3.5 w-3.5 transition-transform duration-200 group-hover/detail:translate-x-0.5"></i>
+                            </button>
                           </div>
                         </div>
                       </div>
@@ -443,7 +584,7 @@
           <div class="space-y-5">
             <!-- Kartu Email -->
             <a
-              href="mailto:bimarespati@email.com"
+              href="mailto:<%= portfolio.contacts.email %>"
               class="group flex items-center gap-4 rounded-2xl border border-stone-200 bg-white p-6 transition-all duration-300 hover:border-red-500 hover:shadow-md"
             >
               <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-red-100 text-red-900 transition-colors duration-300 group-hover:bg-red-900 group-hover:text-white">
@@ -451,17 +592,17 @@
               </span>
               <span class="min-w-0 flex-1">
                 <span class="block text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">Email</span>
-                <span class="mt-0.5 block truncate text-sm font-semibold text-slate-900">bimarespati@email.com</span>
+                <span class="mt-0.5 block truncate text-sm font-semibold text-slate-900"><%= portfolio.contacts.email %></span>
               </span>
               <i data-lucide="arrow-up-right" class="h-5 w-5 shrink-0 text-stone-300 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-red-900"></i>
             </a>
 
             <!-- Kartu WhatsApp -->
             <a
-              href="https://wa.me/6281234567890"
+              href="<%= portfolio.contacts.whatsapp %>"
               target="_blank"
               rel="noopener noreferrer"
-              class="group flex items-center gap-4 rounded-2xl border border-stone-200 bg-white p-6 transition-all duration-300 hover:border-red-500 hover:shadow-md"
+              class="group flex items-center gap-4 rounded-2xl border border-stone-200 bg-white p-6 transition-all duration-300 hover:border-emerald-500 hover:shadow-md"
             >
               <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-[#25D366] transition-colors duration-300 group-hover:bg-[#25D366] group-hover:text-white">
                 <svg viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6" aria-hidden="true">
@@ -470,14 +611,201 @@
               </span>
               <span class="min-w-0 flex-1">
                 <span class="block text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">WhatsApp</span>
-                <span class="mt-0.5 block text-sm font-semibold text-slate-900">+62 812-3456-7890</span>
+                <span class="mt-0.5 block text-sm font-semibold text-slate-900">+62 838-7126-7899</span>
               </span>
               <i data-lucide="arrow-up-right" class="h-5 w-5 shrink-0 text-stone-300 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-emerald-500"></i>
+            </a>
+
+            <!-- Kartu GitHub -->
+            <a
+              href="<%= portfolio.contacts.github %>"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group flex items-center gap-4 rounded-2xl border border-stone-200 bg-white p-6 transition-all duration-300 hover:border-slate-950 hover:shadow-md"
+            >
+              <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-slate-950 text-white transition-colors duration-300 group-hover:bg-slate-800">
+                <i data-lucide="github" class="h-5 w-5"></i>
+              </span>
+              <span class="min-w-0 flex-1">
+                <span class="block text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">GitHub</span>
+                <span class="mt-0.5 block truncate text-sm font-semibold text-slate-900">github.com/bimarespati</span>
+              </span>
+              <i data-lucide="arrow-up-right" class="h-5 w-5 shrink-0 text-stone-300 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-slate-950"></i>
+            </a>
+
+            <!-- Kartu LinkedIn -->
+            <a
+              href="<%= portfolio.contacts.linkedin %>"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group flex items-center gap-4 rounded-2xl border border-stone-200 bg-white p-6 transition-all duration-300 hover:border-[#0A66C2] hover:shadow-md"
+            >
+              <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-sky-50 text-[#0A66C2] transition-colors duration-300 group-hover:bg-[#0A66C2] group-hover:text-white">
+                <i data-lucide="linkedin" class="h-5 w-5"></i>
+              </span>
+              <span class="min-w-0 flex-1">
+                <span class="block text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">LinkedIn</span>
+                <span class="mt-0.5 block truncate text-sm font-semibold text-slate-900">linkedin.com/in/bimarespati</span>
+              </span>
+              <i data-lucide="arrow-up-right" class="h-5 w-5 shrink-0 text-stone-300 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[#0A66C2]"></i>
             </a>
           </div>
         </div>
       </div>
     </section>
   </main>
+
+  <!-- ============================================================
+       MODAL — Case Study / Detail Proyek
+       Menampilkan Role, Masalah, Solusi, Fitur Utama, & Tech Stack
+       saat tombol "Lihat Detail Proyek" pada kartu diklik.
+  ============================================================ -->
+  <div
+    id="project-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="project-modal-title"
+    class="fixed inset-0 z-[60] hidden items-center justify-center p-4"
+  >
+    <div id="project-modal-backdrop" class="absolute inset-0 bg-slate-950/60 backdrop-blur-sm"></div>
+
+    <div id="project-modal-panel" class="relative z-10 max-h-[85vh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-white shadow-2xl">
+      <!-- Cover -->
+      <div class="relative h-44 w-full shrink-0 overflow-hidden bg-slate-100 md:h-56">
+        <img id="project-modal-img" src="" alt="" class="h-full w-full object-cover" />
+        <span
+          id="project-modal-type"
+          class="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.15em] text-red-900 shadow-sm"
+        ></span>
+        <button
+          id="project-modal-close"
+          type="button"
+          aria-label="Tutup detail proyek"
+          class="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full bg-slate-950/70 text-white shadow-sm transition-all duration-200 hover:scale-105 hover:bg-red-900"
+        >
+          <i data-lucide="x" class="h-4 w-4"></i>
+        </button>
+      </div>
+
+      <div class="p-6 md:p-8">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="inline-flex items-center gap-2 rounded-full border border-red-200 bg-red-50 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.25em] text-red-900">
+            [ Case Study ]
+          </span>
+          <span id="project-modal-duration" class="hidden inline-flex items-center gap-1 rounded-full bg-slate-950/85 px-2.5 py-1 text-[11px] font-semibold text-white">
+            <i data-lucide="play" class="h-3 w-3"></i>
+          </span>
+        </div>
+        <h3 id="project-modal-title" class="font-heading mt-3 text-2xl font-extrabold tracking-tight text-slate-950 md:text-3xl"></h3>
+
+        <!-- Role -->
+        <div class="mt-6">
+          <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">Role</p>
+          <p id="project-modal-role" class="mt-1.5 text-sm font-semibold text-slate-700"></p>
+        </div>
+
+        <!-- Masalah -->
+        <div class="mt-5">
+          <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">Masalah</p>
+          <p id="project-modal-problem" class="mt-1.5 text-sm leading-relaxed text-slate-600"></p>
+        </div>
+
+        <!-- Solusi -->
+        <div class="mt-5">
+          <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">Solusi</p>
+          <p id="project-modal-solution" class="mt-1.5 text-sm leading-relaxed text-slate-600"></p>
+        </div>
+
+        <!-- Fitur Utama -->
+        <div class="mt-5">
+          <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">Fitur Utama</p>
+          <ul id="project-modal-features" class="mt-2 grid gap-2 sm:grid-cols-2"></ul>
+        </div>
+
+        <!-- Metrik Proyek -->
+        <div id="project-modal-metrics-wrap" class="mt-5">
+          <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">Metrik Proyek</p>
+          <div id="project-modal-metrics" class="mt-2 grid gap-2 sm:grid-cols-2"></div>
+        </div>
+
+        <!-- Tech Stack / Peralatan -->
+        <div class="mt-5">
+          <p id="project-modal-tech-label" class="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">Tech Stack</p>
+          <div id="project-modal-tech" class="mt-2 flex flex-wrap gap-1.5"></div>
+        </div>
+
+        <!-- Aksi -->
+        <div class="mt-7 border-t border-stone-100 pt-5">
+          <div id="project-modal-web-actions" class="grid grid-cols-2 gap-3">
+            <a
+              id="project-modal-github"
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center gap-2 rounded-xl bg-slate-950 px-4 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-slate-800 hover:shadow-md"
+            >
+              <i data-lucide="github" class="h-4 w-4"></i>
+              GitHub Repo
+            </a>
+            <a
+              id="project-modal-demo"
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center gap-2 rounded-xl bg-red-900 px-4 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-red-800 hover:shadow-md"
+            >
+              <i data-lucide="external-link" class="h-4 w-4"></i>
+              Live Demo
+            </a>
+          </div>
+          <button
+            id="project-modal-watch"
+            type="button"
+            class="hidden w-full items-center justify-center gap-2 rounded-xl bg-red-900 px-4 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-red-800 hover:shadow-md"
+          >
+            <i data-lucide="play" class="h-4 w-4"></i>
+            Tonton Video
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       VIDEO LIGHTBOX — Pemutar karya video proyek
+  ============================================================ -->
+  <div
+    id="video-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Pemutar video proyek"
+    class="fixed inset-0 z-[70] hidden items-center justify-center p-4"
+  >
+    <div id="video-modal-backdrop" class="absolute inset-0 bg-slate-950/75 backdrop-blur-sm"></div>
+
+    <div class="relative z-10 w-full max-w-3xl">
+      <div class="mb-3 flex items-center justify-between">
+        <p class="font-heading text-sm font-bold uppercase tracking-[0.2em] text-white">Karya Video</p>
+        <button
+          id="video-modal-close"
+          type="button"
+          aria-label="Tutup pemutar video"
+          class="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur transition-all duration-200 hover:scale-105 hover:bg-red-900"
+        >
+          <i data-lucide="x" class="h-4 w-4"></i>
+        </button>
+      </div>
+      <div class="aspect-video w-full overflow-hidden rounded-2xl bg-black shadow-2xl">
+        <iframe
+          id="video-modal-frame"
+          class="h-full w-full"
+          src=""
+          title="Pemutar video proyek"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+  </div>
 
 <%- include('partials/footer') %>

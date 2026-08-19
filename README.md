@@ -9,6 +9,13 @@ Web Portofolio Personal berbasis **Node.js + Express + EJS + MySQL**, dengan tam
 - **Skills & Tools** — Programming, Web & Backend, Tools, Video & Multimedia
 - **Featured Projects** — data dinamis dari database SQL, dengan **fallback otomatis ke data dummy** jika MySQL belum terkoneksi
 - **Horizontal Scroll Section** — section proyek di-*pin* (GSAP ScrollTrigger) di desktop: kartu bergerak horizontal mengikuti scroll vertikal dengan progress bar & hint "scroll to explore"; di mobile/tablet otomatis beralih ke native swipe (`overflow-x` + `scroll-snap`) tanpa scroll-jacking
+- **Navigasi kartu proyek** — tombol panah Prev/Next (desktop: memajukan scroll pin satu kartu; mobile: `scrollBy` satu kartu) dengan state dinamis (nonaktif di ujung)
+- **Aksi kartu proyek** — tombol **GitHub Repo** & **Live Demo** di tiap kartu
+- **Modal Case Study** — tombol "Lihat Detail Proyek" membuka modal berisi Role, Masalah, Solusi, Fitur Utama, & Tech Stack
+- **Download CV** — tombol di Hero Section mengunduh `public/cv/Bima-Respati-CV.pdf` (placeholder, silakan ganti dengan CV asli)
+- **Pendidikan & Pengalaman** — section timeline berisi SMK Jakarta Pusat 1 (RPL) + pengalaman leadership dengan ukuran tim, workflow Git, dan tanggung jawab teknis
+- **Breakdown teknis & metrik proyek** — skill backend diperluas (REST API, Authentication, Vercel Deployment) dan metrik nyata (8+ tabel database, REST endpoints, role) tampil di modal case study
+- **Portofolio Video** — kartu video dengan badge role, durasi, peralatan/software, dan lightbox embed player (YouTube) via tombol "Tonton Video"
 - **Contact Form** — POST `/contact`, tersimpan ke tabel `messages`
 - **Iron Spider Theme** — putih bersih + maroon/navy/gold dengan pola jaring laba-laba halus di hero, tanpa dark mode
 - **Flash message** — notifikasi sukses/gagal setelah submit form
@@ -41,6 +48,15 @@ Web Portofolio Personal berbasis **Node.js + Express + EJS + MySQL**, dengan tam
         ├── header.ejs     # Navbar sticky + mobile menu
         └── footer.ejs     # Footer + script (lucide, mobile menu, toast)
 ```
+
+## 📝 Konten yang perlu diganti sebelum deploy
+
+- **WhatsApp** — nomor sudah diisi (`wa.me/6283871267899`); sesuaikan jika berubah. **YouTube** — link social dihapus karena belum ada channel; tambahkan kembali di `app.js` (objek `socials`) saat channel tersedia
+- **`github_url` proyek** — `data/projects.js` & `schema.sql` memakai placeholder (`github.com/bimarespati/webrelawan`, dst.) → ganti dengan repo asli
+- **`video_url` proyek video** — masih `null`; isi link YouTube agar tombol "Tonton Video" & lightbox aktif
+- **File CV** — ganti isi `public/cv/Bima-Respati-CV.pdf` (saat ini placeholder)
+- **Domain OG/canonical** — `siteUrl` di `app.js` sudah diisi `https://porto-mu-taupe.vercel.app` (ubah jika domain final berbeda)
+- **Gambar Open Graph** — meta `og:image` memakai `logo.png`; untuk pratinjau media sosial yang optimal, letakkan gambar 1200×630 di `public/images/og-cover.png` lalu ubah nilai `og:image` di `views/partials/head.ejs`
 
 ## 🚀 Cara Menjalankan
 

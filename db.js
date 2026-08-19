@@ -66,8 +66,9 @@ async function getProjects({ featuredOnly = true } = {}) {
 
   const where = featuredOnly ? 'WHERE is_featured = 1' : '';
   const [rows] = await pool.query(
-    `SELECT id, title, role, description, tech_stack, project_type,
-            link_url, image, is_featured
+    `SELECT id, title, role, description, problem, solution, features,
+            metrics, duration, video_url, tech_stack, project_type,
+            link_url, github_url, image, is_featured
        FROM projects
        ${where}
       ORDER BY is_featured DESC, created_at ASC`

@@ -44,8 +44,8 @@ const portfolio = {
   role: 'Software Engineering Student & Content Creator',
   tagline: 'Building Functional Web Applications & Crafting Engaging Visual Stories',
   about: [
-    'Siswa SMK Rekayasa Perangkat Lunak (RPL) yang berfokus pada pengembangan web application berlogika kuat (Full-Stack/Backend) serta produksi konten visual/video.',
-    'Berpengalaman memimpin dan mengerjakan proyek web serta produksi video multimedia. Siap berkontribusi dalam program PKL.',
+    'Saya siswa SMK Rekayasa Perangkat Lunak (RPL) yang fokus mendalami Software Engineering — khususnya pengembangan web full-stack (Node.js, Express, dan database relasional) — sekaligus aktif dalam produksi video dan konten visual.',
+    'Tujuan saya adalah menjadi software engineer yang juga mampu bercerita lewat visual. Saya terbuka untuk program PKL, proyek freelance, dan kolaborasi — baik di bidang pengembangan aplikasi web maupun produksi video.',
   ],
   skills: [
     {
@@ -56,7 +56,17 @@ const portfolio = {
     {
       category: 'Web & Backend',
       icon: 'server',
-      items: ['Node.js', 'Express', 'EJS', 'HTML5', 'CSS3', 'SQL (Relational Database)'],
+      items: [
+        'Node.js',
+        'Express',
+        'EJS',
+        'REST API',
+        'SQL (Relational Database)',
+        'Authentication',
+        'Vercel Deployment',
+        'HTML5',
+        'CSS3',
+      ],
     },
     {
       category: 'Tools',
@@ -70,9 +80,51 @@ const portfolio = {
     },
   ],
   socials: [
-    { label: 'GitHub', url: 'https://github.com/', icon: 'github' },
-    { label: 'Instagram', url: 'https://instagram.com/', icon: 'instagram' },
-    { label: 'YouTube', url: 'https://youtube.com/', icon: 'youtube' },
+    { label: 'GitHub', url: 'https://github.com/bimarespati', icon: 'github' },
+    { label: 'LinkedIn', url: 'https://linkedin.com/in/bimarespati', icon: 'linkedin' },
+    { label: 'Instagram', url: 'https://instagram.com/res_auditore', icon: 'instagram' },
+  ],
+  contacts: {
+    email: 'bimarespati@gmail.com',
+    whatsapp: 'https://wa.me/6283871267899',
+    github: 'https://github.com/bimarespati',
+    linkedin: 'https://linkedin.com/in/bimarespati',
+  },
+  siteUrl: 'https://porto-mu-taupe.vercel.app',
+  education: [
+    {
+      school: 'SMK Jakarta Pusat 1',
+      major: 'Rekayasa Perangkat Lunak (Software Engineering)',
+      period: '2023 — Sekarang',
+      desc: 'Mendalami pengembangan aplikasi web full-stack: pemrograman JavaScript, basis data relasional, hingga manajemen proyek perangkat lunak.',
+    },
+  ],
+  experiences: [
+    {
+      role: 'Lead / Backend Developer',
+      org: 'webRelawan — Platform Relawan (Proyek PKL)',
+      period: '2024 — Sekarang',
+      team: '4 orang',
+      gitWorkflow: 'GitHub Flow: Branch → PR → Code Review → Merge',
+      responsibilities: [
+        'Merancang skema database relasional (8+ tabel: user, komunitas, event, pendaftaran, dll.)',
+        'Membangun REST API (Node.js + Express) dengan autentikasi & otorisasi 2 role pengguna',
+        'Menjaga kualitas kode lewat code review dan branch protection di GitHub',
+        'Integrasi frontend-backend dan persiapan deployment (Vercel)',
+      ],
+    },
+    {
+      role: 'Sutradara & Editor Utama',
+      org: 'Produksi Video Sekolah & Kompetisi Film',
+      period: '2023 — Sekarang',
+      team: '4-5 orang',
+      gitWorkflow: 'Workflow Produksi: Storyboard → Shooting → Editing → Color Grading',
+      responsibilities: [
+        'Memimpin rapat produksi dan pembagian tugas antar anggota tim',
+        'Menyusun storyboard dan manajemen jadwal shooting',
+        'Editing, mixing audio, dan color grading N-Log (CapCut PC) hingga hasil akhir',
+      ],
+    },
   ],
 };
 
