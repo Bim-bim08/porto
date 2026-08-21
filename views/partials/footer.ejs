@@ -106,10 +106,22 @@
               <div class="mt-4 flex shrink-0 flex-wrap gap-1.5">${techTags(p)}</div>
               <div class="mt-5 shrink-0 border-t border-stone-100 pt-4">
                 ${p.project_type === 'video'
-                  ? `<button type="button" data-project-video="${esc(String(p.id))}" title="${p.video_url ? 'Tonton video' : 'Video belum tersedia'}" class="${p.video_url ? '' : 'cursor-not-allowed opacity-45 hover:translate-y-0 hover:bg-red-900 hover:shadow-none'} inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-red-900 px-3 py-2 text-xs font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-red-800 hover:shadow-md">
-                    <i data-lucide="play" class="h-3.5 w-3.5"></i>
-                    ${p.video_url ? 'Tonton Video' : 'Video Segera Hadir'}
-                  </button>`
+                  ? (p.link_url
+                      ? `<div class="grid grid-cols-2 gap-2">
+                          <a href="${esc(p.link_url)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-1.5 rounded-lg bg-slate-950 px-3 py-2 text-xs font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-slate-800 hover:shadow-md">
+                            <i data-lucide="external-link" class="h-3.5 w-3.5"></i>
+                            Lihat Instagram
+                          </a>
+                          <button type="button" data-project-video="${esc(String(p.id))}" title="${p.video_url ? 'Tonton video' : 'Video belum tersedia'}" class="${p.video_url ? '' : 'cursor-not-allowed opacity-45 hover:translate-y-0 hover:bg-red-900 hover:shadow-none'} inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-red-900 px-3 py-2 text-xs font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-red-800 hover:shadow-md">
+                            <i data-lucide="play" class="h-3.5 w-3.5"></i>
+                            ${p.video_url ? 'Tonton Video' : 'Video Segera Hadir'}
+                          </button>
+                        </div>`
+                      : `<button type="button" data-project-video="${esc(String(p.id))}" title="${p.video_url ? 'Tonton video' : 'Video belum tersedia'}" class="${p.video_url ? '' : 'cursor-not-allowed opacity-45 hover:translate-y-0 hover:bg-red-900 hover:shadow-none'} inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-red-900 px-3 py-2 text-xs font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-red-800 hover:shadow-md">
+                            <i data-lucide="play" class="h-3.5 w-3.5"></i>
+                            ${p.video_url ? 'Tonton Video' : 'Video Segera Hadir'}
+                          </button>`
+                    )
                   : `<div class="grid grid-cols-2 gap-2">
                       <a href="${p.github_url ? esc(p.github_url) : '#'}" ${p.github_url ? '' : 'onclick="return false;"'} title="${p.github_url ? 'Buka repository GitHub' : 'Repository belum tersedia'}" class="${p.github_url ? '' : 'cursor-not-allowed opacity-45 hover:translate-y-0 hover:bg-slate-950 hover:shadow-none'} inline-flex items-center justify-center gap-1.5 rounded-lg bg-slate-950 px-3 py-2 text-xs font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-slate-800 hover:shadow-md">
                         <i data-lucide="github" class="h-3.5 w-3.5"></i>
@@ -400,6 +412,8 @@
       const panel = document.getElementById('project-modal-panel');
       const metricsEl = document.getElementById('project-modal-metrics');
       const techLabelEl = document.getElementById('project-modal-tech-label');
+      const galleryEl = document.getElementById('project-modal-gallery');
+      const galleryStrip = document.getElementById('project-modal-gallery-strip');
       const durationEl = document.getElementById('project-modal-duration');
       const webActions = document.getElementById('project-modal-web-actions');
       const watchBtn = document.getElementById('project-modal-watch');
@@ -425,6 +439,24 @@
             img.classList.remove('hidden');
           } else {
             img.classList.add('hidden');
+          }
+        }
+        // Gallery thumbnails
+        if (galleryEl && galleryStrip) {
+          const gallery = p.gallery || [];
+          if (gallery.length > 1) {
+            galleryEl.classList.remove('hidden');
+            galleryStrip.innerHTML = gallery
+              .map((file, i) => {
+                const isActive = i === 0 ? 'ring-2 ring-red-900 opacity-100' : 'opacity-60 hover:opacity-100';
+                return `<button type="button" data-gallery-idx="${i}" data-gallery-src="/images/${esc(file)}" title="Gambar ${i + 1}" class="${isActive} h-14 w-20 shrink-0 overflow-hidden rounded-lg bg-slate-200 transition-all duration-200 hover:ring-2 hover:ring-red-900">
+                  <img src="/images/${esc(file)}" alt="Gambar ${i + 1}" loading="lazy" class="h-full w-full object-cover" />
+                </button>`;
+              })
+              .join('');
+          } else {
+            galleryEl.classList.add('hidden');
+            galleryStrip.innerHTML = '';
           }
         }
         if (typeBadge) typeBadge.textContent = p.project_type === 'video' ? '🎬 Video & Film' : '💻 Web App';
@@ -484,7 +516,23 @@
 
         // Aksi footer: web (GitHub/Live) vs video (Tonton Video)
         currentProject = p;
-        if (webActions) webActions.classList.toggle('hidden', p.project_type === 'video');
+        if (webActions) {
+          const showWebActions = p.project_type !== 'video' || (p.project_type === 'video' && p.link_url);
+          webActions.classList.toggle('hidden', !showWebActions);
+          // Sembunyikan tombol GitHub untuk video proyek
+          if (githubBtn) githubBtn.classList.toggle('hidden', p.project_type === 'video');
+          // Ubah label tombol demo
+          if (demoBtn) {
+            const demoLabel = demoBtn.querySelector('span:last-child') || demoBtn;
+            if (p.project_type === 'video' && p.link_url) {
+              demoBtn.innerHTML = '<i data-lucide="external-link" class="h-4 w-4"></i> Lihat Instagram';
+              lucide.createIcons();
+            } else {
+              demoBtn.innerHTML = '<i data-lucide="external-link" class="h-4 w-4"></i> Live Demo';
+              lucide.createIcons();
+            }
+          }
+        }
         if (watchBtn) {
           const isVideo = p.project_type === 'video';
           watchBtn.classList.toggle('hidden', !isVideo);
@@ -551,6 +599,24 @@
           if (currentProject && currentProject.video_url && window.openProjectVideo) {
             window.openProjectVideo(currentProject.video_url, watchBtn);
           }
+        });
+      }
+
+      // Gallery thumbnail click: swap main image
+      if (galleryStrip) {
+        galleryStrip.addEventListener('click', (e) => {
+          const thumb = e.target.closest('[data-gallery-src]');
+          if (!thumb) return;
+          if (img) {
+            img.src = thumb.dataset.gallerySrc;
+          }
+          // Highlight active thumbnail
+          galleryStrip.querySelectorAll('[data-gallery-idx]').forEach((b) => {
+            b.classList.remove('ring-2', 'ring-red-900', 'opacity-100');
+            b.classList.add('opacity-60');
+          });
+          thumb.classList.remove('opacity-60');
+          thumb.classList.add('ring-2', 'ring-red-900', 'opacity-100');
         });
       }
 
