@@ -12,7 +12,7 @@ Web Portofolio Personal berbasis **Node.js + Express + EJS + MySQL**, dengan tam
 - **Navigasi kartu proyek** — tombol panah Prev/Next (desktop: memajukan scroll pin satu kartu; mobile: `scrollBy` satu kartu) dengan state dinamis (nonaktif di ujung)
 - **Aksi kartu proyek** — tombol **GitHub Repo** & **Live Demo** di tiap kartu
 - **Modal Case Study** — tombol "Lihat Detail Proyek" membuka modal berisi Role, Masalah, Solusi, Fitur Utama, & Tech Stack
-- **Download CV** — tombol di Hero Section mengunduh `public/cv/Bima-Respati-CV.pdf` (placeholder, silakan ganti dengan CV asli)
+- **Lihat & Download CV** — tombol "Lihat CV" membuka `public/CV_Bima_Respati1.pdf` di tab baru; tombol "Download CV" mengunduh langsung file yang sama
 - **Pendidikan & Pengalaman** — section timeline berisi SMK Jakarta Pusat 1 (RPL) + pengalaman leadership dengan ukuran tim, workflow Git, dan tanggung jawab teknis
 - **Breakdown teknis & metrik proyek** — skill backend diperluas (REST API, Authentication, Vercel Deployment) dan metrik nyata (8+ tabel database, REST endpoints, role) tampil di modal case study
 - **Portofolio Video** — kartu video dengan badge role, durasi, peralatan/software, dan lightbox embed player (YouTube) via tombol "Tonton Video"
@@ -54,7 +54,7 @@ Web Portofolio Personal berbasis **Node.js + Express + EJS + MySQL**, dengan tam
 - **WhatsApp** — nomor sudah diisi (`wa.me/6283871267899`); sesuaikan jika berubah. **YouTube** — link social dihapus karena belum ada channel; tambahkan kembali di `app.js` (objek `socials`) saat channel tersedia
 - **`github_url` proyek** — `data/projects.js` & `schema.sql` memakai placeholder (`github.com/bimarespati/webrelawan`, dst.) → ganti dengan repo asli
 - **`video_url` proyek video** — masih `null`; isi link YouTube agar tombol "Tonton Video" & lightbox aktif
-- **File CV** — ganti isi `public/cv/Bima-Respati-CV.pdf` (saat ini placeholder)
+- **File CV** — ganti isi `public/CV_Bima_Respati1.pdf` (saat ini placeholder)
 - **Domain OG/canonical** — `siteUrl` di `app.js` sudah diisi `https://porto-mu-taupe.vercel.app` (ubah jika domain final berbeda)
 - **Gambar Open Graph** — meta `og:image` memakai `logo.png`; untuk pratinjau media sosial yang optimal, letakkan gambar 1200×630 di `public/images/og-cover.png` lalu ubah nilai `og:image` di `views/partials/head.ejs`
 
